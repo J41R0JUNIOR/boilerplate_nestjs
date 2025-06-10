@@ -5,9 +5,9 @@ import { ProductService } from './products.service';
 
 const prisma = new PrismaClient();
 
+@Controller('product')
 export class ProductController{
-
-    constructor(private readonly productService: ProductService) {}
+  constructor(private readonly productService: ProductService) {}
 
   @Post()
   criarProduto(req: Request, res: Response) {

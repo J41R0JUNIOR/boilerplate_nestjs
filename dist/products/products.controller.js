@@ -12,8 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const client_1 = require("@prisma/client");
 const common_1 = require("@nestjs/common");
+const products_service_1 = require("./products.service");
 const prisma = new client_1.PrismaClient();
-class ProductController {
+let ProductController = class ProductController {
     productService;
     constructor(productService) {
         this.productService = productService;
@@ -34,7 +35,7 @@ class ProductController {
         const id = parseInt(req.params.id);
         return this.productService.delete(id);
     }
-}
+};
 exports.ProductController = ProductController;
 __decorate([
     (0, common_1.Post)(),
@@ -60,4 +61,8 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], ProductController.prototype, "deletarProduto", null);
+exports.ProductController = ProductController = __decorate([
+    (0, common_1.Controller)('product'),
+    __metadata("design:paramtypes", [products_service_1.ProductService])
+], ProductController);
 //# sourceMappingURL=products.controller.js.map

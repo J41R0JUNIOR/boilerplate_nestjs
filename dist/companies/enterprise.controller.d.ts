@@ -14,8 +14,8 @@ export declare class EnterpriseController {
         products: {
             id: number;
             name: string;
-            price: number;
             enterpriseId: number;
+            price: number;
         }[];
     } & {
         id: number;
