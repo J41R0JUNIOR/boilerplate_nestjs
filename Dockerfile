@@ -3,13 +3,17 @@ FROM node:20
 WORKDIR /app
 
 COPY package*.json ./
-COPY prisma ./prisma/
-COPY src ./src/
 
 RUN npm install
+RUN npm install -g @nestjs/cli  
+
+COPY prisma ./prisma/
+COPY src ./src/
+COPY tsconfig*.json ./
 
 RUN npx prisma generate
 
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start:dev"]
+
