@@ -1,5 +1,8 @@
 import { ProductRequestDto } from "./dto.request.products";
+import { PrismaService } from "src/prisma/service.prisma";
 export declare class ProductService {
+    private readonly prisma;
+    constructor(prisma: PrismaService);
     create(dto: ProductRequestDto): import(".prisma/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;

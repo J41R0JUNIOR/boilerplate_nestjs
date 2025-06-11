@@ -1,31 +1,31 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaClient } from "@prisma/client";
 import { ProductRequestDto } from "./dto.request.products";
-
-const prisma = new PrismaClient();
+import { PrismaService } from "src/prisma/service.prisma";
 
 @Injectable()
 export class ProductService {
+     constructor(private readonly prisma: PrismaService) {}
 
     create(dto: ProductRequestDto) {
 
-        return prisma.product.create({
+        return this.prisma.product.create({
             data: { name: dto.name, price: dto.price, enterpriseId: dto.enterpriseId }
         });
     }
 
     getAll(){
-        return prisma.product.findMany({ include: { enterprise: true } });
+        return this.prisma.product.findMany({ include: { enterprise: true } });
     }
 
     update(id: number, name: string, price: number){
-        return prisma.product.update({
+        return this.prisma.product.update({
             where: { id },
             data: { name, price }
         });   
     }
 
     delete(id: number){
-        return prisma.product.delete({ where: { id } });
+        return this.prisma.product.delete({ where: { id } });
     }
 }
