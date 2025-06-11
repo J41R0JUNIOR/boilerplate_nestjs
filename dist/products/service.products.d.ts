@@ -1,5 +1,6 @@
 import { ProductRequestDto } from "./dto.request.products";
 import { PrismaService } from "src/prisma/service.prisma";
+import { ProductRequestUpdateDto } from "./dto.request.update.products";
 export declare class ProductService {
     private readonly prisma;
     constructor(prisma: PrismaService);
@@ -20,7 +21,7 @@ export declare class ProductService {
         price: number;
         enterpriseId: number;
     })[]>;
-    update(id: number, name: string, price: number): import(".prisma/client").Prisma.Prisma__ProductClient<{
+    update(dto: ProductRequestUpdateDto): import(".prisma/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;
         price: number;

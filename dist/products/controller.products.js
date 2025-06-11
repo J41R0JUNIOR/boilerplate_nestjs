@@ -17,6 +17,7 @@ const client_1 = require("@prisma/client");
 const common_1 = require("@nestjs/common");
 const service_products_1 = require("./service.products");
 const dto_request_products_1 = require("./dto.request.products");
+const dto_request_update_products_1 = require("./dto.request.update.products");
 const prisma = new client_1.PrismaClient();
 let ProductController = class ProductController {
     productService;
@@ -26,17 +27,14 @@ let ProductController = class ProductController {
     create(dto) {
         return this.productService.create(dto);
     }
-    listarProdutos() {
+    getAll() {
         return this.productService.getAll();
     }
-    atualizarProduto(req) {
-        const id = parseInt(req.params.id);
-        const { name, price } = req.body;
-        return this.productService.update(id, name, price);
+    update(dto) {
+        return this.productService.update(dto);
     }
-    deletarProduto(req) {
-        const id = parseInt(req.params.id);
-        return this.productService.delete(id);
+    delete(id) {
+        return this.productService.delete(Number(id));
     }
 };
 exports.ProductController = ProductController;
@@ -52,19 +50,21 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], ProductController.prototype, "listarProdutos", null);
+], ProductController.prototype, "getAll", null);
 __decorate([
     (0, common_1.Patch)(),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [dto_request_update_products_1.ProductRequestUpdateDto]),
     __metadata("design:returntype", void 0)
-], ProductController.prototype, "atualizarProduto", null);
+], ProductController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(),
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], ProductController.prototype, "deletarProduto", null);
+], ProductController.prototype, "delete", null);
 exports.ProductController = ProductController = __decorate([
     (0, common_1.Controller)('product'),
     __metadata("design:paramtypes", [service_products_1.ProductService])

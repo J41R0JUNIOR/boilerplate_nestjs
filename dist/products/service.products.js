@@ -25,10 +25,10 @@ let ProductService = class ProductService {
     getAll() {
         return this.prisma.product.findMany({ include: { enterprise: true } });
     }
-    update(id, name, price) {
+    update(dto) {
         return this.prisma.product.update({
-            where: { id },
-            data: { name, price }
+            where: { id: dto.id },
+            data: { name: dto.name, price: dto.price }
         });
     }
     delete(id) {

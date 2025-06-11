@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { PrismaClient } from "@prisma/client";
 import { ProductRequestDto } from "./dto.request.products";
 import { PrismaService } from "src/prisma/service.prisma";
+import { ProductRequestUpdateDto } from "./dto.request.update.products";
 
 @Injectable()
 export class ProductService {
@@ -18,10 +18,10 @@ export class ProductService {
         return this.prisma.product.findMany({ include: { enterprise: true } });
     }
 
-    update(id: number, name: string, price: number){
+    update(dto: ProductRequestUpdateDto){
         return this.prisma.product.update({
-            where: { id },
-            data: { name, price }
+            where: { id: dto.id },
+            data: { name: dto.name, price: dto.price }
         });   
     }
 

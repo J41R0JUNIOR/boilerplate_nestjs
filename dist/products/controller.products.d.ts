@@ -1,6 +1,6 @@
-import { Request } from "express";
 import { ProductService } from './service.products';
 import { ProductRequestDto } from './dto.request.products';
+import { ProductRequestUpdateDto } from './dto.request.update.products';
 export declare class ProductController {
     private readonly productService;
     constructor(productService: ProductService);
@@ -10,7 +10,7 @@ export declare class ProductController {
         price: number;
         enterpriseId: number;
     }, never, import("@prisma/client/runtime/library").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
-    listarProdutos(): import(".prisma/client").Prisma.PrismaPromise<({
+    getAll(): import(".prisma/client").Prisma.PrismaPromise<({
         enterprise: {
             id: number;
             name: string;
@@ -21,13 +21,13 @@ export declare class ProductController {
         price: number;
         enterpriseId: number;
     })[]>;
-    atualizarProduto(req: Request): import(".prisma/client").Prisma.Prisma__ProductClient<{
+    update(dto: ProductRequestUpdateDto): import(".prisma/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;
         price: number;
         enterpriseId: number;
     }, never, import("@prisma/client/runtime/library").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
-    deletarProduto(req: Request): import(".prisma/client").Prisma.Prisma__ProductClient<{
+    delete(id: string): import(".prisma/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;
         price: number;

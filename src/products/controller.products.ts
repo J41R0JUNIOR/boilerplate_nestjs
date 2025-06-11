@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client'
 import { Request, Response } from "express";
-import { Controller, Get, Post, Patch, Delete, Body } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/common';
 import { ProductService } from './service.products';
 import { ProductRequestDto } from './dto.request.products';
+import { ProductRequestUpdateDto } from './dto.request.update.products';
 
 const prisma = new PrismaClient();
 
@@ -16,20 +17,18 @@ export class ProductController{
   }
 
   @Get()
-    listarProdutos() {
+  getAll() {
     return this.productService.getAll();
   }
 
   @Patch()
-  atualizarProduto(req: Request) {
-    const id = parseInt(req.params.id);
-    const { name, price } = req.body;
-    return this.productService.update(id, name, price);
+  update(@Body() dto: ProductRequestUpdateDto) {
+
+    return this.productService.update(dto);
   }
 
-  @Delete()
-  deletarProduto(req: Request) {
-    const id = parseInt(req.params.id);
-    return this.productService.delete(id);
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.productService.delete(Number(id));
   }
 }
