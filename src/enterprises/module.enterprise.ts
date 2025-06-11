@@ -1,4 +1,3 @@
-// companies/module.enterprise.ts
 import { Module } from '@nestjs/common';
 import { EnterpriseService } from './service.enterprise';
 import { EnterpriseController } from './controller.enterprise';
