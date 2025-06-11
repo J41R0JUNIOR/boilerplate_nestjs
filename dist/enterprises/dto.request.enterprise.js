@@ -9,32 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ManagerRequestDto = void 0;
+exports.EnterpriseRequestDto = void 0;
 const class_validator_1 = require("class-validator");
-class ManagerRequestDto {
+const class_transformer_1 = require("class-transformer");
+const dto_request_managers_1 = require("../managers/dto.request.managers");
+class EnterpriseRequestDto {
     name;
-    phone;
-    email;
-    cpf;
+    manager;
 }
-exports.ManagerRequestDto = ManagerRequestDto;
+exports.EnterpriseRequestDto = EnterpriseRequestDto;
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], ManagerRequestDto.prototype, "name", void 0);
+], EnterpriseRequestDto.prototype, "name", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], ManagerRequestDto.prototype, "phone", void 0);
-__decorate([
-    (0, class_validator_1.IsEmail)(),
-    __metadata("design:type", String)
-], ManagerRequestDto.prototype, "email", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Length)(11, 11, { message: 'CPF must have 11 numbers' }),
-    __metadata("design:type", String)
-], ManagerRequestDto.prototype, "cpf", void 0);
-//# sourceMappingURL=manager.request.dto.js.map
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_transformer_1.Type)(() => dto_request_managers_1.ManagerRequestDto),
+    __metadata("design:type", dto_request_managers_1.ManagerRequestDto)
+], EnterpriseRequestDto.prototype, "manager", void 0);
+//# sourceMappingURL=dto.request.enterprise.js.map

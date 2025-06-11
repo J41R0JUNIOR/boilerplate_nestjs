@@ -4,6 +4,7 @@ import { Controller, Get, Post, Patch, Delete, Body, Param } from '@nestjs/commo
 import { ProductService } from './service.products';
 import { ProductRequestDto } from './dto.request.products';
 import { ProductRequestUpdateDto } from './dto.request.update.products';
+import { ProductResponseDto } from './dto.response.products';
 
 const prisma = new PrismaClient();
 
@@ -12,28 +13,32 @@ export class ProductController{
   constructor(private readonly productService: ProductService) {}
 
   @Post()
-  create(@Body() dto: ProductRequestDto) {
-    return  this.productService.create(dto);
+  create(@Body() dto: ProductRequestDto): Promise<ProductResponseDto> {
+    return this.productService.create(dto);
   }
 
   @Post('bulk')
-  createAll(@Body() dtos: ProductRequestDto[]) {
+  createAll(@Body() dtos: ProductRequestDto[]): Promise<ProductResponseDto[]> {
     return this.productService.createAll(dtos);
   }
 
   @Get()
-  getAll() {
+  getAll(): Promise<ProductResponseDto[]> {
     return this.productService.getAll();
   }
 
-  @Patch()
-  update(@Body() dto: ProductRequestUpdateDto) {
+  @Get('id')
+  getById (@Param('id') id: number): Promise<ProductResponseDto> {
+    return this.productService.listById(id);
+  }
 
+  @Patch()
+  update(@Body() dto: ProductRequestUpdateDto): Promise<ProductResponseDto>{
     return this.productService.update(dto);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
+  delete(@Param('id') id: number) {
     return this.productService.delete(Number(id));
   }
 }

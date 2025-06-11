@@ -12,26 +12,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EnterpriseService = void 0;
 const common_1 = require("@nestjs/common");
 const service_prisma_1 = require("../prisma/service.prisma");
+const dto_response_enterprise_1 = require("./dto.response.enterprise");
 let EnterpriseService = class EnterpriseService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
     }
-    getAll() {
-        return this.prisma.enterprise.findMany({
+    async getAll() {
+        let all = await this.prisma.enterprise.findMany({
             include: { manager: true, products: true },
         });
+        return all.map(e => new dto_response_enterprise_1.EnterpriseResponseDto(e));
     }
-    create(dto) {
-        return this.prisma.enterprise.create({
+    async create(dto) {
+        const enterpriseCreated = await this.prisma.enterprise.create({
             data: {
                 name: dto.name,
                 manager: {
                     create: dto.manager,
                 },
             },
-            include: { manager: true },
+            include: { manager: true, products: true },
         });
+        return new dto_response_enterprise_1.EnterpriseResponseDto(enterpriseCreated);
     }
 };
 exports.EnterpriseService = EnterpriseService;

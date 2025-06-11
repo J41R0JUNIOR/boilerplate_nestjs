@@ -14,17 +14,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EnterpriseController = void 0;
 const common_1 = require("@nestjs/common");
-const enterprise_service_1 = require("./enterprise.service");
+const service_enterprise_1 = require("./service.enterprise");
+const dto_request_enterprise_1 = require("./dto.request.enterprise");
 let EnterpriseController = class EnterpriseController {
     enterpriseService;
     constructor(enterpriseService) {
         this.enterpriseService = enterpriseService;
     }
-    getAll() {
+    async getAll() {
         return this.enterpriseService.getAll();
     }
-    create(body) {
-        const { dto } = body;
+    create(dto) {
         return this.enterpriseService.create(dto);
     }
 };
@@ -33,17 +33,17 @@ __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], EnterpriseController.prototype, "getAll", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [dto_request_enterprise_1.EnterpriseRequestDto]),
+    __metadata("design:returntype", Promise)
 ], EnterpriseController.prototype, "create", null);
 exports.EnterpriseController = EnterpriseController = __decorate([
     (0, common_1.Controller)('enterprise'),
-    __metadata("design:paramtypes", [enterprise_service_1.EnterpriseService])
+    __metadata("design:paramtypes", [service_enterprise_1.EnterpriseService])
 ], EnterpriseController);
-//# sourceMappingURL=enterprise.controller.js.map
+//# sourceMappingURL=controller.enterprise.js.map

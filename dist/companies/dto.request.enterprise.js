@@ -24,7 +24,6 @@ __decorate([
     __metadata("design:type", String)
 ], EnterpriseRequestDto.prototype, "name", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.ValidateNested)(),
     (0, class_transformer_1.Type)(() => dto_request_managers_1.ManagerRequestDto),
     __metadata("design:type", dto_request_managers_1.ManagerRequestDto)

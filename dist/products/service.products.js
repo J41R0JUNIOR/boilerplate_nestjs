@@ -12,36 +12,61 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductService = void 0;
 const common_1 = require("@nestjs/common");
 const service_prisma_1 = require("../prisma/service.prisma");
+const dto_response_products_1 = require("./dto.response.products");
 let ProductService = class ProductService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
     }
-    create(dto) {
-        return this.prisma.product.create({
-            data: { name: dto.name, price: dto.price, enterpriseId: dto.enterpriseId }
-        });
-    }
-    createAll(dtos) {
-        return Promise.all(dtos.map((dto) => this.prisma.product.create({
+    async create(dto) {
+        const response = await this.prisma.product.create({
             data: {
                 name: dto.name,
                 price: dto.price,
-                enterpriseId: dto.enterpriseId,
+                enterpriseId: dto.enterpriseId
+            }
+        });
+        const product = await this.listById(response.id);
+        return product;
+    }
+    async listById(id) {
+        const product = await this.prisma.product.findUnique({
+            where: { id },
+            include: { enterprise: true }
+        });
+        if (!product) {
+            throw new Error('Product not found');
+        }
+        return new dto_response_products_1.ProductResponseDto(product);
+    }
+    async createAll(dtos) {
+        const createdProducts = await Promise.all(dtos.map(dto => this.prisma.product.create({
+            data: {
+                name: dto.name,
+                price: dto.price,
+                enterpriseId: dto.enterpriseId
             },
         })));
+        const productsWithEnterprise = await Promise.all(createdProducts.map(p => this.listById(p.id)));
+        return productsWithEnterprise;
     }
-    getAll() {
-        return this.prisma.product.findMany({ include: { enterprise: true } });
+    async getAll() {
+        const response = await this.prisma.product.findMany({ include: { enterprise: true } });
+        return response.map(p => new dto_response_products_1.ProductResponseDto(p));
     }
-    update(dto) {
-        return this.prisma.product.update({
+    async update(dto) {
+        await this.prisma.product.update({
             where: { id: dto.id },
             data: { name: dto.name, price: dto.price }
         });
+        return this.listById(dto.id);
     }
-    delete(id) {
-        return this.prisma.product.delete({ where: { id } });
+    async delete(id) {
+        const deleted = await this.prisma.product.delete({
+            where: { id },
+            include: { enterprise: true }
+        });
+        return new dto_response_products_1.ProductResponseDto(deleted);
     }
 };
 exports.ProductService = ProductService;

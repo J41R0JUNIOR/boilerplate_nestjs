@@ -21,7 +21,7 @@ let EnterpriseController = class EnterpriseController {
     constructor(enterpriseService) {
         this.enterpriseService = enterpriseService;
     }
-    getAll() {
+    async getAll() {
         return this.enterpriseService.getAll();
     }
     create(dto) {
@@ -33,14 +33,14 @@ __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], EnterpriseController.prototype, "getAll", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [dto_request_enterprise_1.EnterpriseRequestDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], EnterpriseController.prototype, "create", null);
 exports.EnterpriseController = EnterpriseController = __decorate([
     (0, common_1.Controller)('enterprise'),
