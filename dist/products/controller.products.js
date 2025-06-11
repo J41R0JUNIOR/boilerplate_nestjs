@@ -27,6 +27,9 @@ let ProductController = class ProductController {
     create(dto) {
         return this.productService.create(dto);
     }
+    createAll(dtos) {
+        return this.productService.createAll(dtos);
+    }
     getAll() {
         return this.productService.getAll();
     }
@@ -45,6 +48,13 @@ __decorate([
     __metadata("design:paramtypes", [dto_request_products_1.ProductRequestDto]),
     __metadata("design:returntype", void 0)
 ], ProductController.prototype, "create", null);
+__decorate([
+    (0, common_1.Post)('bulk'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", void 0)
+], ProductController.prototype, "createAll", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),

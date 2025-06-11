@@ -22,6 +22,15 @@ let ProductService = class ProductService {
             data: { name: dto.name, price: dto.price, enterpriseId: dto.enterpriseId }
         });
     }
+    createAll(dtos) {
+        return Promise.all(dtos.map((dto) => this.prisma.product.create({
+            data: {
+                name: dto.name,
+                price: dto.price,
+                enterpriseId: dto.enterpriseId,
+            },
+        })));
+    }
     getAll() {
         return this.prisma.product.findMany({ include: { enterprise: true } });
     }

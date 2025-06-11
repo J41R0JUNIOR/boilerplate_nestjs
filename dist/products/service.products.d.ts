@@ -10,6 +10,12 @@ export declare class ProductService {
         price: number;
         enterpriseId: number;
     }, never, import("@prisma/client/runtime/library").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
+    createAll(dtos: ProductRequestDto[]): Promise<{
+        id: number;
+        name: string;
+        price: number;
+        enterpriseId: number;
+    }[]>;
     getAll(): import(".prisma/client").Prisma.PrismaPromise<({
         enterprise: {
             id: number;

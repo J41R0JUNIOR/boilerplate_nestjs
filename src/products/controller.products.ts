@@ -16,6 +16,11 @@ export class ProductController{
     return  this.productService.create(dto);
   }
 
+  @Post('bulk')
+  createAll(@Body() dtos: ProductRequestDto[]) {
+    return this.productService.createAll(dtos);
+  }
+
   @Get()
   getAll() {
     return this.productService.getAll();
