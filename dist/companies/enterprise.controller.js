@@ -24,8 +24,8 @@ let EnterpriseController = class EnterpriseController {
         return this.enterpriseService.getAll();
     }
     create(body) {
-        const { name, manager } = body;
-        return this.enterpriseService.create(name, manager);
+        const { dto } = body;
+        return this.enterpriseService.create(dto);
     }
 };
 exports.EnterpriseController = EnterpriseController;

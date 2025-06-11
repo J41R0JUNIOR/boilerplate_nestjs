@@ -16,12 +16,12 @@ let EnterpriseService = class EnterpriseService {
             include: { manager: true, products: true }
         });
     }
-    create(name, manager) {
+    create(dto) {
         return prisma.enterprise.create({
             data: {
-                name,
+                name: dto.name,
                 manager: {
-                    create: manager,
+                    create: dto.manager,
                 }
             },
             include: { manager: true }

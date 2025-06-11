@@ -1,3 +1,4 @@
+import { EnterpriseRequestDto } from './dto.request.enterprise';
 export declare class EnterpriseService {
     getAll(): import(".prisma/client").Prisma.PrismaPromise<({
         manager: {
@@ -11,14 +12,14 @@ export declare class EnterpriseService {
         products: {
             id: number;
             name: string;
-            price: number;
             enterpriseId: number;
+            price: number;
         }[];
     } & {
         id: number;
         name: string;
     })[]>;
-    create(name: string, manager: any): import(".prisma/client").Prisma.Prisma__EnterpriseClient<{
+    create(dto: EnterpriseRequestDto): import(".prisma/client").Prisma.Prisma__EnterpriseClient<{
         manager: {
             id: number;
             name: string;

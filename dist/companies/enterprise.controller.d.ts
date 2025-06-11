@@ -1,4 +1,5 @@
 import { EnterpriseService } from './enterprise.service';
+import { EnterpriseRequestDto } from './dto.request.enterprise';
 export declare class EnterpriseController {
     private readonly enterpriseService;
     constructor(enterpriseService: EnterpriseService);
@@ -22,8 +23,7 @@ export declare class EnterpriseController {
         name: string;
     })[]>;
     create(body: {
-        name: string;
-        manager: any;
+        dto: EnterpriseRequestDto;
     }): import(".prisma/client").Prisma.Prisma__EnterpriseClient<{
         manager: {
             id: number;

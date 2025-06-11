@@ -1,15 +1,19 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { ProductService } from './products.service';
 export declare class ProductController {
     private readonly productService;
     constructor(productService: ProductService);
-    criarProduto(req: Request, res: Response): import(".prisma/client").Prisma.Prisma__ProductClient<{
+    create(body: {
+        name: string;
+        price: number;
+        enterpriseId: number;
+    }): import(".prisma/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;
         price: number;
         enterpriseId: number;
     }, never, import("@prisma/client/runtime/library").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
-    listarProdutos(_: Request, res: Response): import(".prisma/client").Prisma.PrismaPromise<({
+    listarProdutos(): import(".prisma/client").Prisma.PrismaPromise<({
         enterprise: {
             id: number;
             name: string;
@@ -20,13 +24,13 @@ export declare class ProductController {
         price: number;
         enterpriseId: number;
     })[]>;
-    atualizarProduto(req: Request, res: Response): import(".prisma/client").Prisma.Prisma__ProductClient<{
+    atualizarProduto(req: Request): import(".prisma/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;
         price: number;
         enterpriseId: number;
     }, never, import("@prisma/client/runtime/library").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
-    deletarProduto(req: Request, res: Response): import(".prisma/client").Prisma.Prisma__ProductClient<{
+    deletarProduto(req: Request): import(".prisma/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;
         price: number;
