@@ -21,7 +21,7 @@ model Manager {
   phone         String
   email         String
   cpf           String
-  enterprise    Enterprise @relation(fields: [enterpriseId], references: [id])
+  enterprise    riEnterpse @relation(fields: [enterpriseId], references: [id])
   enterpriseId  Int        @unique
 }
 

@@ -8,13 +8,13 @@ export class EnterpriseService {
 
   constructor(private readonly prisma: PrismaService) {}
 
-    async getAll(): Promise<EnterpriseResponseDto[]> {
+  async getAll(): Promise<EnterpriseResponseDto[]> {
 
-      let all = await this.prisma.enterprise.findMany({
-        include: { manager: true, products: true },
-      });
+    let all = await this.prisma.enterprise.findMany({
+      include: { manager: true, products: true },
+    });
 
-      return all.map(e => new EnterpriseResponseDto(e));
+    return all.map(e => new EnterpriseResponseDto(e));
   }
 
   async create(dto: EnterpriseRequestDto): Promise<EnterpriseResponseDto> {

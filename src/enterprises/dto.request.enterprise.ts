@@ -12,5 +12,3 @@ export class EnterpriseRequestDto {
   @Type(() => ManagerRequestDto)
   manager: ManagerRequestDto;
 }
-
-
